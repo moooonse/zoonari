@@ -1,5 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <style name="Theme.Zoonari" parent="Theme.AppCompat.Light.NoActionBar" />
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!--
+        CORRECCIÓN:
+        Cambiamos el tema base a uno compatible con el sistema de Vistas (XML).
+        Esto es lo que evita que la aplicación se cierre.
+    -->
+    <style name="Theme.Zoonari" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Aquí puedes personalizar los colores de tu aplicación en el futuro -->
+        <!--
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        -->
+    </style>
 </resources>
+
 

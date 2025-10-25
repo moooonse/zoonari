@@ -1,121 +1,98 @@
 package com.example.zoonari
 
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.provider.MediaStore
+import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.Toast
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.zoonari.ui.theme.ZooonariTheme
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 
-class MainActivity : ComponentActivity() {
+// CORRECCIÓN 1: El nombre de la clase debe ser ActivityMain para coincidir con el AndroidManifest.xml
+class ActivityMain : AppCompatActivity() {
+
+    // --- LANZADOR PARA LA SOLICITUD DE PERMISOS ---
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+            if (isGranted) {
+                // Si el permiso se concede, abrimos la cámara.
+                Toast.makeText(this, "Permiso de cámara concedido", Toast.LENGTH_SHORT).show()
+                abrirCamara()
+            } else {
+                // Si se deniega, informamos al usuario.
+                Toast.makeText(this, "Permiso de cámara denegado", Toast.LENGTH_LONG).show()
+            }
+        }
+
+    // --- CORRECCIÓN 2: Se crea un nuevo lanzador para la CÁMARA usando la API moderna ---
+    // Este lanzador abre la cámara y recibe la imagen como un Bitmap si la foto se toma con éxito.
+    private val cameraLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                // La foto se tomó correctamente.
+                val data: Intent? = result.data
+                val imageBitmap = data?.extras?.get("data") as? Bitmap
+                if (imageBitmap != null) {
+                    // Si tenemos la imagen, la mostramos en un ImageView (opcional)
+                    Toast.makeText(this, "Foto capturada con éxito", Toast.LENGTH_SHORT).show()
+                    // Si tienes un ImageView en tu layout (ej: con id 'imageViewPreview'), puedes hacer esto:
+                    // val imageView = findViewById<ImageView>(R.id.imageViewPreview)
+                    // imageView.setImageBitmap(imageBitmap)
+                }
+            } else {
+                // El usuario canceló la captura de la foto.
+                Toast.makeText(this, "Captura de foto cancelada", Toast.LENGTH_SHORT).show()
+            }
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            ZooonariTheme {
-                // Surface es como el fondo de tu app
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    // Centramos el menú en la pantalla
-                    Box(contentAlignment = Alignment.Center) {
-                        MenuLateralScreen()
-                    }
-                }
+        setContentView(R.layout.segundapantalla)
+
+        val botonCamara = findViewById<ImageButton>(R.id.btn_camera)
+        // Usamos el operador de llamada segura ?. para evitar crashes si no se encuentra el botón.
+        botonCamara?.setOnClickListener {
+            solicitarPermisoDeCamara()
+        }
+    }
+
+    private fun solicitarPermisoDeCamara() {
+        when {
+            // Caso 1: El permiso ya está concedido, abrimos la cámara directamente.
+            ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED -> {
+                abrirCamara()
+            }
+            // Caso 2: El usuario ya denegó el permiso, le damos una explicación.
+            shouldShowRequestPermissionRationale(Manifest.permission.CAMERA) -> {
+                Toast.makeText(this, "Necesitamos permiso de la cámara para usar esta función.", Toast.LENGTH_LONG).show()
+                // Después de explicar, lanzamos la solicitud de permiso.
+                requestPermissionLauncher.launch(Manifest.permission.CAMERA)
+            }
+            // Caso 3: Es la primera vez que se pide el permiso.
+            else -> {
+                requestPermissionLauncher.launch(Manifest.permission.CAMERA)
             }
         }
     }
-}
 
-@Composable
-fun MenuLateralScreen() {
-    val context = LocalContext.current // Necesario para mostrar Toasts
-
-    // Esta Card actúa como el contenedor de tu menú
-    Card(
-        modifier = Modifier
-            .width(250.dp) // Ancho del menú
-            .wrapContentHeight(), // Altura basada en el contenido
-        shape = RoundedCornerShape(20.dp), // Bordes redondeados
-        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFFF0F0F0)) // Color de fondo del menú
-    ) {
-        // Column organiza los elementos verticalmente
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(20.dp), // Padding interno
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = "Menú",
-                fontSize = 30.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black
-            )
-            Spacer(modifier = Modifier.height(32.dp)) // Espacio vertical
-
-            // Recreamos cada botón
-            MenuButton(text = "Detectar Sonido") {
-                Toast.makeText(context, "Abriendo detector de sonido...", Toast.LENGTH_SHORT).show()
-            }
-            MenuButton(text = "Detectar Imagen") {
-                Toast.makeText(context, "Abriendo detector de imagen...", Toast.LENGTH_SHORT).show()
-            }
-            MenuButton(text = "Registro") {
-                Toast.makeText(context, "Mostrando registro...", Toast.LENGTH_SHORT).show()
-            }
-            MenuButton(text = "Configuración") {
-                Toast.makeText(context, "Abriendo configuración...", Toast.LENGTH_SHORT).show()
-            }
-            MenuButton(text = "Salir") {
-                Toast.makeText(context, "Cerrando la app...", Toast.LENGTH_SHORT).show()
-                // (activity as? Activity)?.finish() // Código para cerrar la app de verdad
-            }
-        }
+    private fun abrirCamara() {
+        // CORRECCIÓN 3: Se usa el nuevo lanzador 'cameraLauncher' para abrir la cámara.
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        cameraLauncher.launch(intent)
     }
-}
 
-// Un Composable reutilizable para los botones del menú
-@Composable
-fun MenuButton(text: String, onClick: () -> Unit) {
-    Button(
-        onClick = onClick,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp), // Espacio entre botones
-        shape = RoundedCornerShape(12.dp),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Color.White, // Color del botón
-            contentColor = Color.Black // Color del texto
-        ),
-        elevation = ButtonDefaults.buttonElevation(defaultElevation = 2.dp)
-    ) {
-        Text(text = text, modifier = Modifier.padding(8.dp))
-    }
+    // El companion object y la constante CODIGO_CAMARA ya no son necesarios
+    // companion object {
+    //     private const val CODIGO_CAMARA = 1001
+    // }
 }
 
 
-// Esto es para previsualizar el diseño en Android Studio
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    ZooonariTheme {
-        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            MenuLateralScreen()
-        }
-    }
-}
 
 
