@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/opcion1_perfil"
+        android:title="Detectar sonido" />
+
+    <item
+        android:id="@+id/opcion2_configuracion"
+        android:title="Detectar imagen" />
+
+    <item
+        android:id="@+id/opcion3_historial"
+        android:title="Historial de Sonidos" />
+
+    <item
+        android:id="@+id/opcion4_ayuda"
+        android:title="Configuracion" />
+
+    <item
+        android:id="@+id/opcion5_salir"
+        android:title="Cerrar Sesión" />
+
+</menu>

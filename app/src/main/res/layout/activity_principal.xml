@@ -1,0 +1,47 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Imagen de fondo -->    <ImageView
+    android:id="@+id/fondo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scaleType="centerCrop"
+    android:src="@drawable/fondoo" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Logo de la aplicación -->
+        <ImageView
+            android:id="@+id/logo_imagen"
+            android:layout_width="334dp"
+            android:layout_height="309dp"
+            android:layout_marginTop="48dp"
+            android:contentDescription="Logo de la aplicación Zoonari"
+            android:src="@drawable/logo" />
+
+        <!--
+            CORRECCIÓN: Botón de play con tu imagen personalizada y más grande.
+            - android:src apunta a tu imagen. CAMBIA "play_button_image" por el nombre de tu archivo.
+            - Se aumentó el tamaño a 150dp x 150dp.
+            - scaleType asegura que la imagen se vea bien.
+        -->
+        <ImageButton
+            android:id="@+id/btn_play"
+            android:layout_width="124dp"
+            android:layout_height="106dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="60dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="Botón para iniciar"
+            android:scaleType="fitCenter"
+            android:src="@drawable/play_boton" />
+
+    </LinearLayout>
+</FrameLayout>
+
+
