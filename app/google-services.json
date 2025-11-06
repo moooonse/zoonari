@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "606374099691",
+    "project_id": "myapplication-0630977b",
+    "storage_bucket": "myapplication-0630977b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:606374099691:android:1fc871ed6350e0e1059cae",
+        "android_client_info": {
+          "package_name": "com.example.zoonari"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBimAjcoymm0NlEASKn3vV1NqvQ3-DTga4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

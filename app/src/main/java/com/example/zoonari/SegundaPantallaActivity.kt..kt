@@ -38,20 +38,24 @@ class SegundaPantallaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.segundapantalla)
 
-        // --- LÓGICA DE BOTONES EXISTENTES (Cámara y Sonido) ---
+        // --- LÓGICA DE BOTONES ---
         val btnCamera = findViewById<ImageButton>(R.id.btn_camera)
         btnCamera?.setOnClickListener {
             solicitarPermisoDeCamara()
         }
 
-        // Este botón ya lleva a la pantalla de sonido, lo dejamos como está.
         val botonSonido = findViewById<ImageButton>(R.id.btn_sonido)
+
+        // ======================= INICIO DE LA CORRECCIÓN =======================
+        // Ahora, al presionar el botón, se abrirá la SonidoActivity.
+        // Asegúrate de haber creado SonidoActivity.kt y su layout como te indiqué.
         botonSonido?.setOnClickListener {
             val intent = Intent(this, SonidoActivity::class.java)
             startActivity(intent)
         }
+        // ======================== FIN DE LA CORRECCIÓN =========================
 
-        // --- LÓGICA DEL MENÚ DESPLEGABLE ---
+        // --- LÓGICA DEL MENÚ DESPLEGABLE (Sin cambios por ahora) ---
         val botonMenu = findViewById<ImageButton>(R.id.btn_menu)
         botonMenu.setOnClickListener {
             val popup = PopupMenu(this, botonMenu)
@@ -59,17 +63,12 @@ class SegundaPantallaActivity : AppCompatActivity() {
 
             popup.setOnMenuItemClickListener { menuItem: MenuItem ->
                 when (menuItem.itemId) {
-                    // === INICIO DE LA MODIFICACIÓN ===
                     R.id.opcion1_perfil -> {
-                        // Navega a la pantalla de Sonido.
-                        val intent = Intent(this, SonidoActivity::class.java)
-                        startActivity(intent)
+                        Toast.makeText(this, "Función de perfil en desarrollo.", Toast.LENGTH_SHORT).show()
                         true
                     }
-                    // === FIN DE LA MODIFICACIÓN ===
                     R.id.opcion2_configuracion -> {
                         Toast.makeText(this, "Has seleccionado 'Detectar imagen'", Toast.LENGTH_SHORT).show()
-                        // TODO: Aquí iría la lógica para abrir la pantalla de imagen.
                         true
                     }
                     R.id.opcion3_historial -> {
@@ -82,7 +81,7 @@ class SegundaPantallaActivity : AppCompatActivity() {
                     }
                     R.id.opcion5_salir -> {
                         Toast.makeText(this, "Cerrando sesión...", Toast.LENGTH_SHORT).show()
-                        finish() // Cierra la pantalla actual
+                        finish()
                         true
                     }
                     else -> false
@@ -113,11 +112,3 @@ class SegundaPantallaActivity : AppCompatActivity() {
         cameraLauncher.launch(intent)
     }
 }
-
-
-
-
-
-
-
-

@@ -1,12 +1,7 @@
 pluginManagement {
     repositories {
-        google {
-            content {
-                includeGroupByRegex("com\\.android.*")
-                includeGroupByRegex("com\\.google.*")
-                includeGroupByRegex("androidx.*")
-            }
-        }
+        // Quitamos las restricciones 'content' para permitir que encuentre todos los plugins
+        google()
         mavenCentral()
         gradlePluginPortal()
     }
@@ -21,4 +16,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Zoonari"
 include(":app")
+
  

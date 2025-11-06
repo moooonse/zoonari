@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.example.zoonari" />
+                  <option name="mobileSdkAppId" value="1:606374099691:android:1fc871ed6350e0e1059cae" />
+                  <option name="projectId" value="myapplication-0630977b" />
+                  <option name="projectNumber" value="606374099691" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

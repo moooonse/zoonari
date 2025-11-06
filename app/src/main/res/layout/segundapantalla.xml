@@ -159,48 +159,37 @@
         android:layout_width="match_parent"
         android:layout_height="87dp"
         android:background="#7AF492"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingHorizontal="16dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
+        <!-- Botón de cámara a la izquierda -->
         <ImageButton
             android:id="@+id/btn_camera"
             android:layout_width="83dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@null"
             android:contentDescription="Cámara"
-            android:src="@drawable/camara" />
+            android:src="@drawable/camara"
+            android:scaleType="fitCenter"
+            android:padding="8dp"/>
 
-        <ImageView
-            android:id="@+id/image_view"
-            android:layout_width="188dp"
-            android:layout_height="14dp"
-            android:layout_margin="16dp"
-            android:background="#7AF492"
-            android:contentDescription="Imagen de cámara"
-            android:scaleType="centerCrop" />
-
+        <!-- Espacio flexible en el medio -->
         <View
-            android:layout_width="185dp"
-            android:layout_height="25dp"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
             android:layout_weight="1" />
 
+        <!-- Botón de sonido a la derecha -->
         <ImageButton
             android:id="@+id/btn_sonido"
             android:layout_width="76dp"
             android:layout_height="76dp"
             android:background="@null"
             android:contentDescription="Sonido"
-            android:src="@drawable/sonido" />
+            android:src="@drawable/sonido"
+            android:scaleType="fitCenter"
+            android:padding="8dp"/>
 
     </LinearLayout>
 </LinearLayout>
-

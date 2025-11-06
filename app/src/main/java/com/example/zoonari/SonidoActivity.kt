@@ -33,6 +33,3 @@ class SonidoActivity : AppCompatActivity() {
         // Se eliminaron los setOnClickListener de btnPausa y btnDetener
     }
 }
-
-
-
