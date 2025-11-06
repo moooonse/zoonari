@@ -40,7 +40,3 @@
         android:src="@drawable/rojo" /> <!-- ¡CORRECCIÓN CLAVE AQUÍ! -->
 
 </RelativeLayout>
-
-
-
-

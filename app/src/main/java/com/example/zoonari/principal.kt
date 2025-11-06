@@ -2,29 +2,39 @@ package com.example.zoonari
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageButton
+import android.os.Handler
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 
 class PrincipalActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_principal)
 
-        // --- CÓDIGO PARA HACER FUNCIONAR EL BOTÓN ---
+        // ===== INICIO DE LA MODIFICACIÓN =====
 
-        // 1. Encontrar el botón "play" en el layout usando su ID.
-        val botonPlay = findViewById<ImageButton>(R.id.btn_play)
+        // Tiempo que durará la pantalla principal (2000 milisegundos = 2 segundos)
+        val TIEMPO_SPLASH: Long = 2000
 
-        // 2. Asignar una acción para cuando el usuario haga clic.
-        botonPlay.setOnClickListener {
+        // Handler para ejecutar una acción después de un tiempo
+        Handler(Looper.getMainLooper()).postDelayed({
 
+            // Creamos un intent para ir a la actividad de inicio de sesión
             val intent = Intent(this, InicioSesionActivity::class.java)
-
-            // 4. Ejecutar la orden para abrir la nueva pantalla.
             startActivity(intent)
-        }
+
+            // Cerramos esta actividad (PrincipalActivity) para que el usuario no pueda volver a ella
+            finish()
+
+        }, TIEMPO_SPLASH)
+
+        // ===== FIN DE LA MODIFICACIÓN =====
     }
 }
+
+
+
+
+
 
 

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E7F0DE"
+    tools:context=".RegistrarseActivity">
+
+    <!-- 1. El LinearLayout del encabezado ahora es hijo directo del ConstraintLayout -->
+    <LinearLayout
+        android:id="@+id/encabezado_layout"
+        android:layout_width="391dp"
+        android:layout_height="115dp"
+        android:layout_margin="12dp"
+        android:background="@drawable/encabezado_bg"
+        android:elevation="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="98dp"
+            android:layout_height="69dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/circle_white_bg"
+            android:contentDescription="Logo Animal"
+            android:padding="10dp"
+            android:src="@drawable/leon" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <!-- 2. Los EditText y el Button ahora también son hijos directos del ConstraintLayout -->
+
+    <!-- CAMPO PARA EL NOMBRE -->
+    <EditText
+        android:id="@+id/input_nombre_registro"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:hint="Nombre Completo"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/encabezado_layout" />
+
+    <!-- CAMPO PARA EL EMAIL -->
+    <EditText
+        android:id="@+id/input_email_registro"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Correo Electrónico"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="@+id/input_nombre_registro"
+        app:layout_constraintStart_toStartOf="@+id/input_nombre_registro"
+        app:layout_constraintTop_toBottomOf="@+id/input_nombre_registro" />
+
+    <!-- CAMPO PARA LA CONTRASEÑA -->
+    <EditText
+        android:id="@+id/input_password_registro"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/input_email_registro"
+        app:layout_constraintStart_toStartOf="@+id/input_email_registro"
+        app:layout_constraintTop_toBottomOf="@+id/input_email_registro" />
+
+    <!-- BOTÓN PARA CREAR CUENTA -->
+    <Button
+        android:id="@+id/btn_crear_cuenta"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Crear Cuenta"
+        app:layout_constraintEnd_toEndOf="@+id/input_password_registro"
+        app:layout_constraintStart_toStartOf="@+id/input_password_registro"
+        app:layout_constraintTop_toBottomOf="@+id/input_password_registro" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

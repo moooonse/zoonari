@@ -30,16 +30,6 @@
             - Se aumentó el tamaño a 150dp x 150dp.
             - scaleType asegura que la imagen se vea bien.
         -->
-        <ImageButton
-            android:id="@+id/btn_play"
-            android:layout_width="124dp"
-            android:layout_height="106dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="60dp"
-            android:background="@android:color/transparent"
-            android:contentDescription="Botón para iniciar"
-            android:scaleType="fitCenter"
-            android:src="@drawable/play_boton" />
 
     </LinearLayout>
 </FrameLayout>
